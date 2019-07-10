@@ -61,7 +61,7 @@ class SignUpFormBase extends React.Component {
                     type="text"
                     onChange={this.onChange}
                     placeholder="Full Name"
-                    className="m-2"
+                    className="mx-auto w-50 my-2"
                 />
                 <Input
                     name="email"
@@ -69,7 +69,7 @@ class SignUpFormBase extends React.Component {
                     type="text"
                     onChange={this.onChange}
                     placeholder="Email"
-                    className="m-2"
+                    className="mx-auto w-50 my-2"
                 />
                 <Input
                     name="passwordOne"
@@ -77,7 +77,7 @@ class SignUpFormBase extends React.Component {
                     type="password"
                     onChange={this.onChange}
                     placeholder="Password"
-                    className="m-2"
+                    className="mx-auto w-50 my-2"
                 />
                 <Input
                     name="passwordTwo"
@@ -85,16 +85,20 @@ class SignUpFormBase extends React.Component {
                     type="password"
                     onChange={this.onChange}
                     placeholder="Confirm Password"
-                    className="m-2"
+                    className="mx-auto w-50 my-2"
                 />
                 <Button
+                    color="danger"
                     type="Submit"
                     disabled={isNotValid}
-                    className="mx-auto d-block"
+                    className="mx-auto w-50 my-2"
+                    block
+                    outline
                 >
                     Sign Up
                 </Button>
                 <Alert
+                    className="mx-auto w-50 my-2"
                     color="danger"
                     isOpen={error}
                     toggle={this.onErrorDismiss}
