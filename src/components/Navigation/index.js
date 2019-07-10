@@ -9,6 +9,7 @@ import {
     NavLink
 } from "reactstrap";
 import * as ROUTES from "../../constants/routes";
+import SignOutButton from "../SignOut";
 export default class Example extends React.Component {
     constructor(props) {
         super(props);
@@ -49,8 +50,10 @@ export default class Example extends React.Component {
                             <NavItem>
                                 <NavLink href={ROUTES.ADMIN}>Admin</NavLink>
                             </NavItem>
+                            <SignOutButton />
                         </Nav>
                     </Collapse>
+
                     <NavbarBrand href="/" className="ml-auto">
                         Video App
                     </NavbarBrand>
