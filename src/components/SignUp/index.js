@@ -48,7 +48,7 @@ class SignUpFormBase extends React.Component {
     };
     render() {
         const { username, email, passwordOne, passwordTwo, error } = this.state;
-        const isNotValid =
+        const isInvalid =
             passwordOne !== passwordTwo ||
             passwordOne === "" ||
             email === "" ||
@@ -90,7 +90,7 @@ class SignUpFormBase extends React.Component {
                 <Button
                     color="danger"
                     type="Submit"
-                    disabled={isNotValid}
+                    disabled={isInvalid}
                     className="mx-auto w-50 my-2"
                     block
                     outline
