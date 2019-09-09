@@ -10,12 +10,13 @@ import {
 } from "reactstrap";
 import * as ROUTES from "../../constants/routes";
 import SignOutButton from "../SignOut";
-export default class Example extends React.Component {
+export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
+            authUser: null,
             collapsed: true
         };
     }
