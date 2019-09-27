@@ -10,13 +10,14 @@ import {
 } from "reactstrap";
 import * as ROUTES from "../../constants/routes";
 import SignOutButton from "../SignOut";
-export default class Navigation extends React.Component {
+import { AuthUserContext } from "../Session";
+
+export class Navigation extends React.Component {
     constructor(props) {
         super(props);
-
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
-            authUser: null,
+            authUser: props.authUser,
             collapsed: true
         };
     }
@@ -26,35 +27,26 @@ export default class Navigation extends React.Component {
             collapsed: !this.state.collapsed
         });
     }
+
     render() {
         return (
             <div>
-                <Navbar color="danger" dark expand="sm">
+                <Navbar color="primary" dark expand="sm">
                     <NavbarToggler
                         onClick={this.toggleNavbar}
                         className="mr-2"
                     />
-                    <Collapse isOpen={!this.state.collapsed} navbar>
-                        <Nav navbar>
-                            <NavItem>
-                                <NavLink href={ROUTES.SIGN_IN}>Sign In</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href={ROUTES.LANDING}>Landing</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href={ROUTES.HOME}>Home</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href={ROUTES.ACCOUNT}>Account</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href={ROUTES.ADMIN}>Admin</NavLink>
-                            </NavItem>
-                            <SignOutButton />
-                        </Nav>
-                    </Collapse>
+                    <AuthUserContext.Consumer>
+                        {authUser =>
+                            authUser ? (
+                                <NavigationAuth />
+                            ) : (
+                                <NavigationNonAuth />
+                            )
+                        }
+                    </AuthUserContext.Consumer>
 
+                    <Collapse isOpen={!this.state.collapsed} navbar></Collapse>
                     <NavbarBrand href="/" className="ml-auto">
                         Video App
                     </NavbarBrand>
@@ -63,3 +55,38 @@ export default class Navigation extends React.Component {
         );
     }
 }
+
+const NavigationAuth = () => {
+    return (
+        <Nav navbar>
+            <NavItem>
+                <NavLink href={ROUTES.LANDING}>Landing</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={ROUTES.HOME}>Home</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={ROUTES.ACCOUNT}>Account</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={ROUTES.ADMIN}>Admin</NavLink>
+            </NavItem>
+            <SignOutButton />
+        </Nav>
+    );
+};
+
+const NavigationNonAuth = () => {
+    return (
+        <Nav navbar>
+            <NavItem>
+                <NavLink href={ROUTES.SIGN_IN}>Sign In</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={ROUTES.LANDING}>Landing</NavLink>
+            </NavItem>
+        </Nav>
+    );
+};
+
+export default Navigation;
